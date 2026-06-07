@@ -1,14 +1,10 @@
-name: Deploy site to Pages
+name: Deploy React (Vite) to Pages
 
 on:
-  # מריץ את האוטומציה בכל פעם שיש Push לענף הראשי
   push:
     branches: ["main"]
-
-  # מאפשר להריץ את האוטומציה גם ידנית דרך לשונית Actions
   workflow_dispatch:
 
-# הגדרת הרשאות נדרשות עבור GitHub Pages
 permissions:
   contents: read
   pages: write
@@ -22,30 +18,28 @@ jobs:
   deploy:
     environment:
       name: github-pages
-      url: ${{ steps:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout קוד המקור
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: הגדרת Node.js
+      - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'npm'
 
-      - name: התקנת תלויות (Dependencies)
+      - name: Install dependencies
         run: npm ci
 
-      - name: הרצת ה-Build לפרויקט
+      - name: Build project
         run: npm run build
 
-      - name: העלאת התוצרים (Artifacts) ל-Pages
+      - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # כאן מגדירים את התיקייה שנוצרת אחרי ה-Build. ב-Vite זה dist, ב-React ישן זה build
-          path: './build'
+          path: './dist' # <--- כאן מוגדרת תיקיית dist של Vite
 
-      - name: פרסום האתר ל-GitHub Pages
+      - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
