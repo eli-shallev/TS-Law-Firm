@@ -1,0 +1,6 @@
+{
+  "name": "טננבאום שלו - משרד עורכי דין",
+  "description": "אתר משרד עורכי הדין של שני טננבאום – מומחיות משפטית בליטיגציה, חדלות פירעון, ייפוי כוח מתמשך, ירושות וצוואות.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
