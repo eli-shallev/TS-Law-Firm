@@ -144,7 +144,7 @@ export default function HomeView({ onNavClick, onContactSubmit }: HomeViewProps)
                 <div className="w-12 h-12 rounded-full flex items-center justify-center mb-6 bg-white/5">
                   <Banknote className="text-[#e9c349]" size={26} />
                 </div>
-                <h3 className="font-serif text-lg md:text-xl text-white font-semibold mb-4">גבייה והוצל"פ</h3>
+                <h3 className="font-serif text-lg md:text-xl text-white font-semibold mb-4">גבייה והוצאה לפועל</h3>
                 <p className="text-white/80 font-sans text-xs md:text-sm leading-relaxed text-justify">
                   גביית חובות, המחאות חוזרות ומימוש פסקי דין בנחישות וביעילות מול לשכות ההוצאה לפועל ברחבי הארץ.
                 </p>
