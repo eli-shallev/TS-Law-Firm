@@ -29,19 +29,64 @@ export default function HomeView({ onNavClick, onContactSubmit }: HomeViewProps)
     subject: 'פנייה כללית',
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [isDemoMode, setIsDemoMode] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.fullName || !formData.phone) {
       alert('אנא מלאו שם ומספר טלפון ליצירת קשר');
       return;
     }
+
+    setIsSubmitting(true);
+    setSubmitError(null);
+    setIsDemoMode(false);
+
+    const web3formsKey = (import.meta as any).env.VITE_WEB3FORMS_ACCESS_KEY;
+
+    if (web3formsKey && web3formsKey.trim() !== "" && !web3formsKey.includes("YOUR") && !web3formsKey.includes("VITE_")) {
+      try {
+        const response = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json"
+          },
+          body: JSON.stringify({
+            access_key: web3formsKey,
+            from_name: "אתר משרד עורכי דין טננבאום שלו (טופס מהיר)",
+            subject: `פנייה חדשה (מהירה) מהאתר בנושא: ${formData.subject}`,
+            name: formData.fullName,
+            phone: formData.phone,
+            email: formData.email,
+            title: formData.subject,
+          })
+        });
+
+        const data = await response.json();
+        if (!data.success) {
+          throw new Error(data.message || "שגיאה בשליחת הטופס המהיר דרך Web3Forms");
+        }
+      } catch (error: any) {
+        console.error("Web3Forms home page submission failed:", error);
+        setSubmitError(error.message || "אירעה שגיאה בחיבור לשרת המשלוח. נסה שוב מאוחר יותר.");
+        setIsSubmitting(false);
+        return;
+      }
+    } else {
+      setIsDemoMode(true);
+    }
+
     onContactSubmit(formData);
     setIsSubmitted(true);
+    setIsSubmitting(false);
     setFormData({ fullName: '', phone: '', email: '', subject: 'פנייה כללית' });
     setTimeout(() => {
       setIsSubmitted(false);
-    }, 5000);
+      setIsDemoMode(false);
+    }, 12000);
   };
 
   const handleConsultationClick = () => {
@@ -294,32 +339,36 @@ export default function HomeView({ onNavClick, onContactSubmit }: HomeViewProps)
           <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-5 gap-4 items-center max-w-[1100px] mx-auto">
             <input 
               required
+              disabled={isSubmitting}
               type="text" 
               placeholder="שם מלא *"
               value={formData.fullName}
               onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-              className="w-full px-4 py-3 bg-white border border-gray-300 focus:border-[#cca830] focus:ring-1 focus:ring-[#cca830] text-base md:text-sm outline-none transition-colors"
+              className="w-full px-4 py-3 bg-white border border-gray-300 focus:border-[#cca830] focus:ring-1 focus:ring-[#cca830] text-base md:text-sm outline-none transition-colors disabled:bg-gray-100 disabled:text-gray-500"
             />
             <input 
               required
+              disabled={isSubmitting}
               type="tel" 
               placeholder="טלפון ליצירת קשר *"
               value={formData.phone}
               onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-              className="w-full px-4 py-3 bg-white border border-gray-300 focus:border-[#cca830] focus:ring-1 focus:ring-[#cca830] text-base md:text-sm outline-none transition-all text-right"
+              className="w-full px-4 py-3 bg-white border border-gray-300 focus:border-[#cca830] focus:ring-1 focus:ring-[#cca830] text-base md:text-sm outline-none transition-all text-right disabled:bg-gray-100 disabled:text-gray-500"
               dir="ltr"
             />
             <input 
+              disabled={isSubmitting}
               type="email" 
               placeholder="כתובת אימייל"
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              className="w-full px-4 py-3 bg-white border border-gray-300 focus:border-[#cca830] focus:ring-1 focus:ring-[#cca830] text-base md:text-sm outline-none transition-colors"
+              className="w-full px-4 py-3 bg-white border border-gray-300 focus:border-[#cca830] focus:ring-1 focus:ring-[#cca830] text-base md:text-sm outline-none transition-colors disabled:bg-gray-100 disabled:text-gray-500"
             />
             <select
+              disabled={isSubmitting}
               value={formData.subject}
               onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-              className="w-full px-4 py-3 bg-white border border-gray-300 focus:border-[#cca830] focus:ring-1 focus:ring-[#cca830] text-base md:text-sm outline-none transition-colors text-right"
+              className="w-full px-4 py-3 bg-white border border-gray-300 focus:border-[#cca830] focus:ring-1 focus:ring-[#cca830] text-base md:text-sm outline-none transition-colors text-right disabled:bg-gray-100 disabled:text-gray-500"
             >
               <option value="פנייה כללית">פנייה כללית</option>
               <option value="חדלות פירעון ושיקום">חדלות פירעון ושיקום</option>
@@ -330,21 +379,36 @@ export default function HomeView({ onNavClick, onContactSubmit }: HomeViewProps)
             </select>
             <button 
               type="submit"
-              className="w-full bg-[#cca830] hover:bg-[#b39129] text-white font-semibold text-sm py-3.5 shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer"
+              disabled={isSubmitting}
+              className="w-full bg-[#cca830] hover:bg-[#b39129] disabled:bg-gray-400 disabled:cursor-not-allowed text-white font-semibold text-sm py-3.5 shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer"
             >
               <Send size={15} />
-              <span>שלח פנייה</span>
+              <span>{isSubmitting ? 'שולח...' : 'שלח פנייה'}</span>
             </button>
           </form>
+
+          {submitError && (
+            <div className="mt-4 text-red-600 font-bold text-sm">
+              {submitError}
+            </div>
+          )}
 
           {isSubmitted && (
             <motion.div 
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="mt-6 text-[#25D366] font-bold text-sm"
+              className="mt-6 max-w-2xl mx-auto space-y-2 py-4 px-4 bg-green-50 border border-green-200 rounded-sm"
               id="home-contact-success-notification"
             >
-              הפנייה נשלחה בהצלחה! נציג מהמשרד יחזור אליכם בהקדם.
+              <p className="text-[#20b855] font-bold text-sm">
+                ✓ הפנייה נשלחה ונקלטה בהצלחה! נציג מהמשרד יחזור אליכם בהקדם.
+              </p>
+              {isDemoMode && (
+                <div className="mt-2 text-right bg-amber-50 border border-amber-200 p-3 rounded text-xs text-amber-800 space-y-1">
+                  <p className="font-bold">💡 מצב סימולציה מקומית (פנייה נשמרה בלוג):</p>
+                  <p>על מנת לקבל את פניות המיילים לתיבת הדואר האלקטרוני האמיתית שלך, עליך להגדיר את מפתח הגישה של Web3Forms בקובץ ה-<code>.env</code> עם מפתח הגישה שקיבלת: <code>VITE_WEB3FORMS_ACCESS_KEY</code>.</p>
+                </div>
+              )}
             </motion.div>
           )}
         </div>

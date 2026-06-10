@@ -18,6 +18,9 @@ export default function ContactView({ onContactSubmit }: ContactViewProps) {
 
   const [submissions, setSubmissions] = useState<ContactSubmission[]>([]);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [isDemoMode, setIsDemoMode] = useState(false);
 
   // Load and watch local contact logs
   useEffect(() => {
@@ -31,11 +34,51 @@ export default function ContactView({ onContactSubmit }: ContactViewProps) {
     }
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.fullName || !formData.phone) {
       alert('אנא מלאו שם מלא ומספר טלפון לפחות');
       return;
+    }
+
+    setIsSubmitting(true);
+    setSubmitError(null);
+    setIsDemoMode(false);
+
+    const web3formsKey = (import.meta as any).env.VITE_WEB3FORMS_ACCESS_KEY;
+    
+    if (web3formsKey && web3formsKey.trim() !== "" && !web3formsKey.includes("YOUR") && !web3formsKey.includes("VITE_")) {
+      try {
+        const response = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json"
+          },
+          body: JSON.stringify({
+            access_key: web3formsKey,
+            from_name: "אתר משרד עורכי דין טננבאום שלו",
+            subject: `פנייה חדשה מהאתר בנושא: ${formData.subject}`,
+            name: formData.fullName,
+            phone: formData.phone,
+            email: formData.email,
+            message: formData.message,
+            title: formData.subject,
+          })
+        });
+
+        const data = await response.json();
+        if (!data.success) {
+          throw new Error(data.message || "שגיאה בשליחת הטופס דרך Web3Forms");
+        }
+      } catch (error: any) {
+        console.error("Web3Forms submission failed:", error);
+        setSubmitError(error.message || "אירעה שגיאה בחיבור לשרת המשלוח. נסה שוב מאוחר יותר.");
+        setIsSubmitting(false);
+        return;
+      }
+    } else {
+      setIsDemoMode(true);
     }
 
     onContactSubmit(formData);
@@ -51,6 +94,7 @@ export default function ContactView({ onContactSubmit }: ContactViewProps) {
     localStorage.setItem('shani_law_contact_logs', JSON.stringify(updated));
 
     setIsSubmitted(true);
+    setIsSubmitting(false);
     setFormData({
       fullName: '',
       phone: '',
@@ -61,7 +105,8 @@ export default function ContactView({ onContactSubmit }: ContactViewProps) {
 
     setTimeout(() => {
       setIsSubmitted(false);
-    }, 5000);
+      setIsDemoMode(false);
+    }, 12000);
   };
 
   const clearSubmissions = () => {
@@ -245,62 +290,44 @@ export default function ContactView({ onContactSubmit }: ContactViewProps) {
 
                   <button 
                     type="submit"
-                    className="w-full bg-[#cca830] hover:bg-[#b39129] text-white font-sans font-bold py-4 px-10 shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2 cursor-pointer"
+                    disabled={isSubmitting}
+                    className="w-full bg-[#cca830] hover:bg-[#b39129] disabled:bg-gray-400 disabled:cursor-not-allowed text-white font-sans font-bold py-4 px-10 shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2 cursor-pointer text-center"
                   >
                     <Send size={16} />
-                    <span>שלחו פנייה מאובטחת</span>
+                    <span>{isSubmitting ? 'שולח פנייה באופן מאובטח...' : 'שלחו פנייה מאובטחת'}</span>
                   </button>
+
+                  {submitError && (
+                    <div className="text-center font-sans font-bold text-red-600 text-sm py-2">
+                      {submitError}
+                    </div>
+                  )}
 
                   {isSubmitted && (
                     <motion.div 
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="text-center font-bold text-[#25D366] text-sm py-2"
+                      className="text-center space-y-2 py-4 px-4 bg-green-50 border border-green-200 rounded-sm"
                       id="contact-success-response"
                     >
-                      הפנייה נשלחה ונקלטה בהצלחה! נציג מהצוות יחזור אליכם בהקדם.
+                      <p className="font-sans font-bold text-[#20b855] text-base">
+                        ✓ הפנייה נשלחה ונקלטה בהצלחה!
+                      </p>
+                      <p className="font-sans text-xs text-gray-600">
+                        נציג מקצועי של המשרד יחזור אליכם בהקדם האפשרי.
+                      </p>
+                      {isDemoMode && (
+                        <div className="mt-3 text-right bg-amber-50 border border-amber-200 p-3 rounded text-xs text-amber-800 space-y-1">
+                          <p className="font-bold">💡 מצב סימולציה מקומית (פנייה נשמרה בלוג):</p>
+                          <p>על מנת לקבל את פניות המיילים לתיבת הדואר האלקטרוני האמיתית שלך, עליך להגדיר את מפתח הגישה של Web3Forms בקובץ ה-<code>.env</code> שלך (עם שם המפתח: <code>VITE_WEB3FORMS_ACCESS_KEY</code>).</p>
+                        </div>
+                      )}
                     </motion.div>
                   )}
                 </form>
               </div>
 
-              {/* Local Storage Persistent Submissions Logs for Mockup Realism */}
-              {submissions.length > 0 && (
-                <div className="bg-[#f8f9fa] border border-gray-200 p-6 rounded-sm text-right" id="local-submission-history-box">
-                  <div className="flex justify-between items-center flex-row-reverse mb-4">
-                    <div className="flex items-center gap-2 flex-row-reverse text-[#001F3F]">
-                      <History size={16} className="text-[#cca830]" />
-                      <h3 className="font-serif font-bold text-[17px]">היסטוריית הפניות המקומיות שלך</h3>
-                    </div>
-                    <button 
-                      onClick={clearSubmissions}
-                      className="flex items-center gap-1 text-xs text-red-500 hover:text-red-700 font-bold transition-colors cursor-pointer"
-                    >
-                      <Trash2 size={13} />
-                      <span>ניקוי היסטוריה</span>
-                    </button>
-                  </div>
 
-                  <div className="space-y-4 max-h-[300px] overflow-y-auto pr-2">
-                    {submissions.map((sub) => (
-                      <div key={sub.id} className="bg-white border border-gray-100 p-4 shadow-sm text-xs">
-                        <div className="flex justify-between items-center mb-2 flex-row-reverse">
-                          <span className="font-bold text-[#001F3F] text-sm">{sub.fullName} - {sub.subject}</span>
-                          <span className="text-gray-400 font-sans">{sub.timestamp}</span>
-                        </div>
-                        <p className="text-gray-600 font-sans">
-                          <strong>טלפון:</strong> {sub.phone} | <strong>אימייל:</strong> {sub.email || 'מידע לא סופק'}
-                        </p>
-                        {sub.message && (
-                          <p className="text-gray-500 mt-2 italic bg-gray-50 p-2 border-r border-[#cca830] text-justify font-sans">
-                            "{sub.message}"
-                          </p>
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
 
             </div>
 
