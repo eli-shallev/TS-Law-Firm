@@ -182,20 +182,20 @@ export default function Header({ activeView, setActiveView }: HeaderProps) {
               <div className="px-6 py-4 flex flex-col gap-1 text-right divide-y divide-gray-50">
                 <button 
                   onClick={() => handleNavClick('home')}
-                  className={`w-full py-3 font-semibold cursor-pointer ${activeView === 'home' ? 'text-[#cca830]' : 'text-gray-800'}`}
+                  className={`w-full text-right py-3 font-semibold cursor-pointer ${activeView === 'home' ? 'text-[#cca830]' : 'text-gray-800'}`}
                 >
                   דף הבית
                 </button>
                 <button 
                   onClick={() => handleNavClick('about')}
-                  className={`w-full py-3 font-semibold cursor-pointer ${activeView === 'about' ? 'text-[#cca830]' : 'text-gray-800'}`}
+                  className={`w-full text-right py-3 font-semibold cursor-pointer ${activeView === 'about' ? 'text-[#cca830]' : 'text-gray-800'}`}
                 >
                   אודות המשרד
                 </button>
                 
                 {/* Practice areas in mobile list format */}
                 <div className="py-2">
-                  <span className="block text-xs font-bold text-gray-400 py-1 uppercase tracking-wider">תחומי התמחות:</span>
+                  <span className="block text-right text-xs font-bold text-gray-400 py-1 uppercase tracking-wider">תחומי התמחות:</span>
                   <div className="flex flex-col gap-1 pr-3 border-r-2 border-gray-100 mt-1">
                     {practiceAreas.map((area) => (
                       <button
@@ -211,7 +211,7 @@ export default function Header({ activeView, setActiveView }: HeaderProps) {
 
                 <button 
                   onClick={() => handleNavClick('contact')}
-                  className={`w-full py-3 font-semibold cursor-pointer ${activeView === 'contact' ? 'text-[#cca830]' : 'text-gray-800'}`}
+                  className={`w-full text-right py-3 font-semibold cursor-pointer ${activeView === 'contact' ? 'text-[#cca830]' : 'text-gray-800'}`}
                 >
                   צור קשר
                 </button>
