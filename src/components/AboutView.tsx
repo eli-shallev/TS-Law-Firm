@@ -1,4 +1,3 @@
-import { ShieldAlert, Scale, Shield, Award } from 'lucide-react';
 import { motion } from 'motion/react';
 
 export default function AboutView() {
@@ -20,11 +19,10 @@ export default function AboutView() {
             <div className="space-y-6 max-w-2xl text-justify font-sans text-gray-700 text-base md:text-lg leading-relaxed">
               <p>
                 עו"ד שני טננבאום, מייסדת המשרד, מביאה עמה שילוב ייחודי של מומחיות משפטית מעמיקה, ראייה עסקית רחבה וגישה אנושית יוצאת דופן. שני היא בעלת תואר ראשון במשפטים (LL.B) ותואר ראשון במנהל עסקים (B.A), וחברה בלשכת עורכי הדין בישראל משנת 2016.
+                <br />
+                שני נשואה לאסף, ולהם שלושה ילדים.
               </p>
-              <p className="text-sm text-[#cca830] font-bold flex items-center gap-1.5 justify-end mt-4">
-                <Award size={16} />
-                <span>חברת בלשכת עורכי הדין ומגשרת משפטית מוסמכת</span>
-              </p>
+
             </div>
           </div>
 
