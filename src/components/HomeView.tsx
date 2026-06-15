@@ -344,6 +344,7 @@ export default function HomeView({ onNavClick, onContactSubmit }: HomeViewProps)
               disabled={isSubmitting}
               type="text" 
               placeholder="שם מלא *"
+              aria-label="שם מלא"
               value={formData.fullName}
               onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
               className="w-full px-4 py-3 bg-white border border-gray-300 focus:border-[#cca830] focus:ring-1 focus:ring-[#cca830] text-base md:text-sm outline-none transition-colors disabled:bg-gray-100 disabled:text-gray-500"
@@ -353,6 +354,7 @@ export default function HomeView({ onNavClick, onContactSubmit }: HomeViewProps)
               disabled={isSubmitting}
               type="tel" 
               placeholder="טלפון ליצירת קשר *"
+              aria-label="טלפון ליצירת קשר"
               value={formData.phone}
               onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
               className="w-full px-4 py-3 bg-white border border-gray-300 focus:border-[#cca830] focus:ring-1 focus:ring-[#cca830] text-base md:text-sm outline-none transition-all text-right disabled:bg-gray-100 disabled:text-gray-500"
@@ -362,12 +364,14 @@ export default function HomeView({ onNavClick, onContactSubmit }: HomeViewProps)
               disabled={isSubmitting}
               type="email" 
               placeholder="כתובת אימייל"
+              aria-label="כתובת אימייל"
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               className="w-full px-4 py-3 bg-white border border-gray-300 focus:border-[#cca830] focus:ring-1 focus:ring-[#cca830] text-base md:text-sm outline-none transition-colors disabled:bg-gray-100 disabled:text-gray-500"
             />
             <select
               disabled={isSubmitting}
+              aria-label="נושא הפנייה"
               value={formData.subject}
               onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
               className="w-full px-4 py-3 bg-white border border-gray-300 focus:border-[#cca830] focus:ring-1 focus:ring-[#cca830] text-base md:text-sm outline-none transition-colors text-right disabled:bg-gray-100 disabled:text-gray-500"

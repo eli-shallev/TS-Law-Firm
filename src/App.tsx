@@ -3,6 +3,7 @@ import { ActiveView, ContactSubmission } from './types';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import WhatsAppButton from './components/WhatsAppButton';
+import AccessibilityWidget from './components/AccessibilityWidget';
 import HomeView from './components/HomeView';
 import AboutView from './components/AboutView';
 import InsolvencyView from './components/InsolvencyView';
@@ -111,6 +112,7 @@ export default function App() {
 
       {/* Floating active action anchors (WhatsApp, Call support, floating tags) */}
       <WhatsAppButton />
+      <AccessibilityWidget />
     </div>
   );
 }

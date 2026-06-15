@@ -214,29 +214,28 @@ export default function ContactView({ onContactSubmit }: ContactViewProps) {
             </div>
 
             {/* Main Interactive Submit Form Form (Right side is 8cols) */}
-            <div className="lg:col-span-8 order-1 lg:order-2 space-y-10">
-              <div className="bg-white border border-gray-200 p-8 md:p-12 shadow-lg rounded-sm text-right">
-                <div className="mb-8">
-                  <h2 className="font-serif text-3xl text-[#001F3F] font-bold mb-2">שלחו לנו פנייה מהירה</h2>
-                </div>
-
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="lg:col-span-8 order-1 lg:order-2">
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <label className="block text-xs font-bold text-gray-400 uppercase tracking-wide">שם מלא *</label>
+                      <label htmlFor="contact-fullName" className="block text-xs font-bold text-gray-400 uppercase tracking-wide">שם מלא *</label>
                       <input 
                         required
+                        id="contact-fullName"
                         type="text" 
+                        aria-label="שם מלא"
                         value={formData.fullName}
                         onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
                         className="w-full px-4 py-3 bg-white border border-gray-300 focus:border-[#cca830] focus:ring-1 focus:ring-[#cca830] text-base md:text-sm outline-none transition-colors"
                       />
                     </div>
                     <div className="space-y-2">
-                      <label className="block text-xs font-bold text-gray-400 uppercase tracking-wide">מספר טלפון *</label>
+                      <label htmlFor="contact-phone" className="block text-xs font-bold text-gray-400 uppercase tracking-wide">מספר טלפון *</label>
                       <input 
                         required
+                        id="contact-phone"
                         type="tel" 
+                        aria-label="מספר טלפון"
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                         className="w-full px-4 py-3 bg-white border border-gray-300 focus:border-[#cca830] focus:ring-1 focus:ring-[#cca830] text-base md:text-sm outline-none transition-colors text-right"
@@ -247,17 +246,21 @@ export default function ContactView({ onContactSubmit }: ContactViewProps) {
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <label className="block text-xs font-bold text-gray-400 uppercase tracking-wide">כתובת אימייל</label>
+                      <label htmlFor="contact-email" className="block text-xs font-bold text-gray-400 uppercase tracking-wide">כתובת אימייל</label>
                       <input 
+                        id="contact-email"
                         type="email" 
+                        aria-label="כתובת אימייל"
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         className="w-full px-4 py-3 bg-white border border-gray-300 focus:border-[#cca830] focus:ring-1 focus:ring-[#cca830] text-base md:text-sm outline-none"
                       />
                     </div>
                     <div className="space-y-2">
-                      <label className="block text-xs font-bold text-gray-400 uppercase tracking-wide">נושא הפנייה</label>
+                      <label htmlFor="contact-subject" className="block text-xs font-bold text-gray-400 uppercase tracking-wide">נושא הפנייה</label>
                       <select
+                        id="contact-subject"
+                        aria-label="נושא הפנייה"
                         value={formData.subject}
                         onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                         className="w-full px-4 py-3 bg-white border border-gray-300 focus:border-[#cca830] focus:ring-1 focus:ring-[#cca830] text-base md:text-sm outline-none transition-colors text-right"
@@ -273,9 +276,11 @@ export default function ContactView({ onContactSubmit }: ContactViewProps) {
                   </div>
 
                   <div className="space-y-2">
-                    <label className="block text-xs font-bold text-gray-400 uppercase tracking-wide">פירוט הפנייה</label>
+                    <label htmlFor="contact-message" className="block text-xs font-bold text-gray-400 uppercase tracking-wide">פירוט הפנייה</label>
                     <textarea 
+                      id="contact-message"
                       rows={5}
+                      aria-label="פירוט הפנייה"
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       placeholder="אנא ספרו לנו בקצרה על המקרה המבוקש..."
@@ -327,8 +332,7 @@ export default function ContactView({ onContactSubmit }: ContactViewProps) {
             </div>
 
           </div>
-        </div>
-      </main>
-    </motion.div>
-  );
+        </main>
+      </motion.div>
+    );
 }
