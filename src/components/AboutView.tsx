@@ -1,4 +1,5 @@
 import { motion } from 'motion/react';
+import aboutImg from '../assets/images/aboutImg.webp';
 
 export default function AboutView() {
   return (
@@ -32,7 +33,7 @@ export default function AboutView() {
               <img 
                 alt="Portrait of Attorney Shani Tenenbaum" 
                 className="w-full h-auto object-cover" 
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0xz3xT5eVHQznxt9LHCb1kVZDaswehRYgixFOnfT05y_UXBi3Ll_8WLOJ1Pqm5E-2dAtYXbMz-PCnhHbdNJBrw5ZsPytq2aNjtOUpD_wDEHwgB49-2z2I5tjwn3VyG_Ie1nppElHp6XpqBiBiUAT7Zg21JPvBCBvDYn9akmOdtGeFVvBjIxJfSoIsQfKIMpYqorfW8xU5_S4AJJPuIuPXllQowbjS6G_fDx3NTIBi0snAKvH2VtDz1Wo5y254EWSARoNc4VwLytTh"
+                src={aboutImg}
                 referrerPolicy="no-referrer"
               />
             </div>
@@ -58,10 +59,10 @@ export default function AboutView() {
                 את דרכה המקצועית החלה שני בהתמחות ובעבודה רבת שנים בתחום חדלות הפירעון במשרדים מובילים. לאורך השנים, צברה ניסיון נדיר ורב-ערך כאשר ליוותה מאות הליכי פשיטת רגל וחדלות פירעון מטעם נאמן הממונה על ידי הכונס הרשמי ובית המשפט עצמו.
               </p>
               <p>
-                העובדה ששני פעלה בתוך המערכת בשם הגופים המנהלים את ההליכים, מעניקה לה יתרון אסטרטגי מכריע עבור לקוחותינו כיום. היא מכירה את הליכי חדלות הפירעון "מבפנים" על כל דקויותיהם, את שיקולי המערכת ואת הדרכים היעילות ביותר לצלוח את ההליך בשלום.
+                העובדה ששני פעלה בתוך המערכת בשם הגופים המנהלים את ההליכים, מעניקה לה יתרון אסטרטגי מכריע עבור לקוחותינו כיום. שני מכירה את הליכי חדלות הפירעון "מבפנים" על כל דקויותיהם, את שיקולי המערכת ואת הדרכים היעילות ביותר לצלוח את ההליך בשלום.
               </p>
               <p className="font-bold">
-                היכרות מעמיקה זו מאפשרת לה לבנות עבור כל לקוח אסטרטגיה מדויקת, המובילה לתוצאות אופטימליות ולמיצוי מקסימלי של זכויותיהם, מתוך מטרה לסיים את ההליך בצורה הקלה, הנוחה והמהירה ביותר.
+                היכרות מעמיקה זו מאפשרת למשרדנו לבנות עבור כל לקוח אסטרטגיה מדויקת, המובילה לתוצאות אופטימליות ולמיצוי מקסימלי של זכויותיו, מתוך מטרה לסיים את ההליך בצורה הקלה, הנוחה והמהירה ביותר.
               </p>
             </div>
           </div>
@@ -82,31 +83,7 @@ export default function AboutView() {
             </div>
           </div>
 
-          {/* "I Believe" / Vision (Minimal Design with Gold Line) */}
-          <div className="space-y-6">
-            <div className="editorial-line mb-4" />
-            <h2 className="font-serif text-3xl md:text-4xl text-[#001F3F] font-bold mb-10 leading-tight">
-              ה"אני מאמין" שלי - מקצועיות בלתי מתפשרת, אתכם לאורך כל הדרך
-            </h2>
-            <div className="space-y-6 text-justify text-[#191c1d] font-sans text-[16px] md:text-[18px] leading-relaxed mb-10">
-              <p>
-                אני מאמינה כי עורך דין טוב הוא קודם כל <strong>שותף לדרך</strong>. עבורי, המשפט הוא לא רק עולם של תקנות וסעיפים, אלא כלי משמעותי לשינוי מציאות עבור אנשים הנמצאים בצמתים מורכבים בחייהם. הגישה המקצועית שלי מושתתת על ליטיגציה אקטיבית: חתירה מתמדת למגע, מקצועיות ללא פשרות ויכולת לצפות מראש את מהלכי הצד השני כדי להגן עליכם.
-              </p>
-              <p>
-                אני מובילה את לקוחותיי בביטחון בתוך אולם בית המשפט, תוך ניתוח מעמיק של הסיכויים והסיכונים, במטרה להבטיח את מיקסום סיכויי ההצלחה בכל תיק ותיק. עבורי, כל מקרה הוא עולם ומלואו, ואני מחויבת להעניק את המעטפת המשפטית והאישית הטובה ביותר לאורך כל הדרך.
-              </p>
-            </div>
-            
-            {/* Elegant Quotation block with Gold border treatment */}
-            <div className="relative pr-8 border-r-4 border-[#cca830] py-4 rounded-sm p-6">
-              <p className="text-[#001F3F] italic leading-relaxed mb-4 text-xl md:text-2xl font-serif font-medium">
-                "החזון שלי הוא להוות עבורכם עוגן של יציבות בתוך הסערה המשפטית, ולהוביל אתכם בבטחה אל עבר עתיד חדש ורגוע יותר."
-              </p>
-              <p className="font-sans text-[#001F3F] font-bold text-sm tracking-wider">
-                ההצלחה שלכם היא המדד האמיתי להצלחה שלי.
-              </p>
-            </div>
-          </div>
+
 
         </div>
       </section>

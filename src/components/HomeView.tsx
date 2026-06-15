@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ActiveView, ContactSubmission } from '../types';
+import believeImg from '../assets/images/believeImg.webp';
 import { 
   Scale, 
   Wallet, 
@@ -105,7 +106,7 @@ export default function HomeView({ onNavClick, onContactSubmit }: HomeViewProps)
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTX0hmCR5VHLpI6A53Eku4tvD3rXzkO_paYHdLjfg54a1Z09RMiMQ5bj_m0VB56tmluJDLb7H5gixg7Y8AgiZj6VsL9DK0Zy1YB4OcUCkZ4bT6ko_nZLRehoYMmilgcwxA2cb8n5hQ5-VnlqUIJM5oZ_jkW8Ur7YC0XFvSuiyvQOObkC7MH_fq1nYRATuXpGuKLXt7PZdSTqUs0VgKA4DqMRqOKfnNvJaIDhNDYlCC55TSiAhpL_-SG-iFH8GpmA40PtgwW1aWLLpk"
             referrerPolicy="no-referrer"
           />
-          <div className="absolute inset-0 bg-black/55 backdrop-blur-[1px]" />
+          <div className="absolute inset-0 bg-[#001F3F]/65" />
         </div>
         <div className="relative z-10 w-full max-w-[1280px] mx-auto px-6 text-right">
           <motion.div 
@@ -211,7 +212,7 @@ export default function HomeView({ onNavClick, onContactSubmit }: HomeViewProps)
                 </div>
                 <h3 className="font-serif text-lg md:text-xl text-white font-semibold mb-4">ירושות וצוואות</h3>
                 <p className="text-white/80 font-sans text-xs md:text-sm leading-relaxed text-justify">
-                  עריכת צוואות, בקשות לקבלת צווי ירושה וניהול עיזבונות וסכסוכים משפטיים ברגישות ובמקצועיות עילאית.
+                  עריכת צוואות, בקשות לקבלת צווי ירושה וניהול עיזבונות וסכסוכים משפטיים ברגישות ובמקצועיות.
                 </p>
               </div>
               <button 
@@ -302,7 +303,7 @@ export default function HomeView({ onNavClick, onContactSubmit }: HomeViewProps)
               {/* Citation quote footer element inside design */}
               <div className="border-r-4 border-[#cca830] pr-5 py-2 mt-auto" id="visionary-quote-pulled">
                 <p className="font-serif text-lg text-gray-800 italic leading-relaxed text-justify">
-                  "החזון שלי הוא להוות עבורכם עוגן של יציבות בתוך הסערה, להקל עליכם את הבירוקרטיה ככל הניתן, ולהוביל אתכם בבטחה אל עבר עתיד חדש ורגוע יותר. <strong className="text-[#001F3F] font-semibold">ההצלחה שלכם היא המדד האמיתי להצלחה שלי.</strong>"
+                  "החזון שלי הוא להוות עבורכם עוגן של יציבות בתוך הסערה, להקל עליכם את הבירוקרטיה ככל הניתן, ולהוביל אתכם בבטחה אל עבר עתיד חדש ורגוע יותר."
                 </p>
                 <div className="flex items-center gap-2 mt-3 flex-row text-xs text-gray-500 font-bold tracking-wider">
                   <HeartHandshake size={14} className="text-[#cca830]" />
@@ -317,7 +318,7 @@ export default function HomeView({ onNavClick, onContactSubmit }: HomeViewProps)
                 <img 
                   alt="עו&quot;ד שני טננבאום | מנהלת ומייסדת המשרד" 
                   className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105" 
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvJwZCuBR_TzfFSOevi7aCUucUu7HWu0jXBCJNLDUM_1FeDAyv4z1ACn8a5vtqLVLykQUs2GaRf3iFe34Czr6uz4JzbVBzYjYuyeDwWCtF4xR0LcgdcZdCJYvvBFpwBZFToY1uMdU5y-65zXKq5OjtGD1SwF3U1jAusBEaxDilQD_IxNzjLUspPq2HYaVC9IbiaSV2QC9e9IFozH0MdtViZjHA1_B9Yw6eeev98H7xRWAam-jlUmgdZA23F8DYmvr8Ax-3thgZ4-9j"
+                  src={believeImg}
                   referrerPolicy="no-referrer"
                 />
               </div>

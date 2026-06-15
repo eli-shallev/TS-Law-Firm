@@ -34,7 +34,7 @@ export default function Header({ activeView, setActiveView }: HeaderProps) {
       {/* Top Utility Bar */}
       <div className="bg-[#001F3F] text-white/90 py-2.5 border-b border-white/10 w-full font-sans text-xs">
         <div className="max-w-[1280px] mx-auto px-6 flex flex-row items-center">
-          <div className="flex flex-wrap items-center gap-y-2 gap-x-6 flex-row w-full justify-start">
+          <div className="flex flex-wrap items-center gap-y-2 gap-x-6 flex-row w-full justify-end">
             <a 
               href="tel:052-4088886" 
               className="flex items-center gap-2 hover:text-[#e9c349] transition-colors"

@@ -100,7 +100,7 @@ export default function Footer({ onNavClick }: FooterProps) {
 
           {/* Centered Copyright with elegant font sizing */}
           <div className="text-white/60 font-sans text-sm md:w-1/3 text-center order-3 md:order-2" id="footer-copyright-text">
-            © טננבאום שלו - משרד עורכי דין. כל הזכויות שמורות {new Date().getFullYear()}.
+            © טננבאום שלו - משרד עורכי דין. כל הזכויות שמורות.
           </div>
 
           {/* Social Network gold-themed badge buttons centered with high-end luxury styling */}

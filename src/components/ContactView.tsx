@@ -217,9 +217,6 @@ export default function ContactView({ onContactSubmit }: ContactViewProps) {
               <div className="bg-white border border-gray-200 p-8 md:p-12 shadow-lg rounded-sm text-right">
                 <div className="mb-8">
                   <h2 className="font-serif text-3xl text-[#001F3F] font-bold mb-2">שלחו לנו פנייה מהירה</h2>
-                  <p className="font-sans text-sm text-gray-500">
-                    השאירו פרטים מדויקים ונציג מקצועי של המשרד יחזור אליכם תוך פחות מ-24 שעות.
-                  </p>
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-6">
@@ -231,7 +228,6 @@ export default function ContactView({ onContactSubmit }: ContactViewProps) {
                         type="text" 
                         value={formData.fullName}
                         onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                        placeholder="שירה כהן / משה סלומון"
                         className="w-full px-4 py-3 bg-white border border-gray-300 focus:border-[#cca830] focus:ring-1 focus:ring-[#cca830] text-base md:text-sm outline-none transition-colors"
                       />
                     </div>
@@ -242,7 +238,6 @@ export default function ContactView({ onContactSubmit }: ContactViewProps) {
                         type="tel" 
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        placeholder="050-0000000"
                         className="w-full px-4 py-3 bg-white border border-gray-300 focus:border-[#cca830] focus:ring-1 focus:ring-[#cca830] text-base md:text-sm outline-none transition-colors text-right"
                         dir="ltr"
                       />
@@ -256,7 +251,6 @@ export default function ContactView({ onContactSubmit }: ContactViewProps) {
                         type="email" 
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        placeholder="yourname@gmail.com"
                         className="w-full px-4 py-3 bg-white border border-gray-300 focus:border-[#cca830] focus:ring-1 focus:ring-[#cca830] text-base md:text-sm outline-none"
                       />
                     </div>
