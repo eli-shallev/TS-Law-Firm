@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ActiveView, ContactSubmission } from '../types';
 import believeImg from '../assets/images/believeImg.webp';
+import heroImg from '../assets/images/heroImg.webp';
 import { 
   Scale, 
   Wallet, 
@@ -103,10 +104,10 @@ export default function HomeView({ onNavClick, onContactSubmit }: HomeViewProps)
           <img 
             className="w-full h-full object-cover" 
             alt="Sophisticated and prestigious law firm interior" 
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTX0hmCR5VHLpI6A53Eku4tvD3rXzkO_paYHdLjfg54a1Z09RMiMQ5bj_m0VB56tmluJDLb7H5gixg7Y8AgiZj6VsL9DK0Zy1YB4OcUCkZ4bT6ko_nZLRehoYMmilgcwxA2cb8n5hQ5-VnlqUIJM5oZ_jkW8Ur7YC0XFvSuiyvQOObkC7MH_fq1nYRATuXpGuKLXt7PZdSTqUs0VgKA4DqMRqOKfnNvJaIDhNDYlCC55TSiAhpL_-SG-iFH8GpmA40PtgwW1aWLLpk"
+            src={heroImg}
             referrerPolicy="no-referrer"
           />
-          <div className="absolute inset-0 bg-[#001F3F]/65" />
+          <div className="absolute inset-0 bg-[#001F3F]/80" />
         </div>
         <div className="relative z-10 w-full max-w-[1280px] mx-auto px-6 text-right">
           <motion.div 

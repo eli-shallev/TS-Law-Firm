@@ -1,5 +1,6 @@
 import { Scroll, Heart } from 'lucide-react';
 import { motion } from 'motion/react';
+import heroImg from '../assets/images/heroImg.webp';
 
 interface PracticeViewProps {
   onContactClick: () => void;
@@ -18,7 +19,7 @@ export default function WillsView({ onContactClick }: PracticeViewProps) {
           <img 
             alt="Wills and inheritances background" 
             className="w-full h-full object-cover" 
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgTmDOJ67_jlnMaZ83xk8vbq8PzqS1zUWs3n2s038xUFn4nXIuNcLgyKHw6Ia2NkHS8JKtQqesdUPCx4clnmMQbZ22lJzTYUKR8zPXh-MtpDij8-wjiNq4XM2pTX3eHOrvCDrTpe4temFQqGARGkZI0qf0F7ELHfVv0iyXdsoq_gixkuryDQ4kKqeo7DDcTOzRgbYoMDag9Oi27lNoR8t1MW774mwGnHmpxrZTEz-cMbyLXr54uB3-bxhB2YE1lhZuACKjQ3LFm1pj"
+            src={heroImg}
             referrerPolicy="no-referrer"
           />
           <div className="absolute inset-0 bg-[#001F3F]/80" />

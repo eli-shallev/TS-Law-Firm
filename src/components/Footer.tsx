@@ -1,4 +1,5 @@
 import { ActiveView } from '../types';
+import logoImg from '../assets/images/logo.webp';
 
 const FacebookGoldIcon = () => (
   <div 
@@ -91,7 +92,7 @@ export default function Footer({ onNavClick }: FooterProps) {
             <img 
               alt="טננבאום שלו - משרד עורכי דין" 
               className="h-16 md:h-20 w-auto object-contain cursor-pointer transition-transform duration-300 hover:scale-[1.02]" 
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAchZE7KigNBNIHjdETHT4e5STOxLgVK2giEZSo4D3oBczAoSFIgi4VKXvHvz8GGm-ZNJW2dk5ifWyYpMMMomiT21R7GfzzLPfqvrrfdet5fTmMzVGlU5EW6JaC-RQI5oAeDtWvw_SYoXHRFZIysOlb50pnyUd2YFQFu4DhgHeOpoctmjhbOH_AX8T3oWDLF77oN1GHL3gDapozEBirNM5UVOV3eI8PQG0tk0EXzclhxL8hVwnYlDBpr5WegTLLQiV9S9DYKeRNPShT"
+              src={logoImg}
               onClick={handleLogoClick}
               referrerPolicy="no-referrer"
               id="footer-brand-logo"

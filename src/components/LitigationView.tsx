@@ -1,5 +1,6 @@
 import { Scale, TrendingUp, Anchor, Briefcase, Gavel, Handshake, FileSymlink } from 'lucide-react';
 import { motion } from 'motion/react';
+import heroImg from '../assets/images/heroImg.webp';
 
 interface PracticeViewProps {
   onContactClick: () => void;
@@ -18,7 +19,7 @@ export default function LitigationView({ onContactClick }: PracticeViewProps) {
           <img 
             alt="Professional law office background" 
             className="w-full h-full object-cover" 
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6dsVpRXBC4ONKKRVtxY_zmaH5lG4nCaosWZlebWrjmQ2NJJfpbloOTcOUmpd5XF7qjMkuI09Y1kswi4eXWsClI95E-55KMAwk_YHniFKBqm7s6bEpl3UEClqnjoBQNizTKWa8ZUEQ7N3_654N70weYCZu5QgonlPxxRNduIr5lDNj7sJAmptQze8C41RQ28g9z_lcis-lIuHnqnHOTJ7b4c16O4BtMvdoZx9OZz2rlYIelkkMcu_g_sjdZGg89iIzrJaCWh8jhhR_"
+            src={heroImg}
             referrerPolicy="no-referrer"
           />
           <div className="absolute inset-0 bg-[#001F3F]/80" />

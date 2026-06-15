@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ContactSubmission } from '../types';
 import { MapPin, Phone, Mail, Clock, Send, Landmark, History, Trash2 } from 'lucide-react';
 import { motion } from 'motion/react';
+import heroImg from '../assets/images/heroImg.webp';
 
 interface ContactViewProps {
   onContactSubmit: (submission: Omit<ContactSubmission, 'id' | 'timestamp'>) => void;
@@ -126,7 +127,7 @@ export default function ContactView({ onContactSubmit }: ContactViewProps) {
           <img 
             alt="Contact law office background image" 
             className="w-full h-full object-cover" 
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDshF9zqOsk_cf2I55c938x6YC6F4cjm2rqIjWVa-YcLCyixZq0qslUn-VFj4u5FLI5fJmFAwTvUy_T8P1obQdWo6oLykuOhV8lBorHZ0eiHxJfIwuiAncxtyIVAFKsIrR2GA22hKFhC0Ykj-uoU0fvtH49YLnMVBbfruytksYvxTrJLIqiPQKL1Tchv7KwVcxq0K_Mnt0CEE6_aNa_PVGqKMyodj1n_MB40Abd-w8jwi2qj5Stp6YA-Q9lU4Yw_7gdgt1JxRM-6AXh"
+            src={heroImg}
             referrerPolicy="no-referrer"
           />
           <div className="absolute inset-0 bg-[#001F3F]/80" />

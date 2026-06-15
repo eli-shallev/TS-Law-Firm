@@ -1,6 +1,7 @@
 import { Wallet, Users, Gauge, Shield, Zap, Gavel, FileText } from 'lucide-react';
 import { motion } from 'motion/react';
 import { ActiveView } from '../types';
+import heroImg from '../assets/images/heroImg.webp';
 
 interface PracticeViewProps {
   onContactClick: () => void;
@@ -19,7 +20,7 @@ export default function InsolvencyView({ onContactClick }: PracticeViewProps) {
           <img 
             alt="Professional law office meeting room background" 
             className="w-full h-full object-cover" 
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqcGQH30zQwgB5a8iTSg-ASSi63veJztuwGTUyt79OJIMVWrIMLxkJVWAW8cwUys_r30OJjB-EigVMr4XCoYNpoRr7bqIJDXwpTKnY-EMH2Jk4xJwFFc9m_2c9mAVlRUKYP9aZiTMu-M-cMOrTOQjELAKeT_UQKkChcEflTz0tykih4JE3YB7hDXisRc64kOIeNZT0ovHq6D5YdINM-CFvy9KDCsIpG9zShkrQhyeE-9V3w0LFaowQKHd1h7QuUWlNLhm2T2kWrSWp"
+            src={heroImg}
             referrerPolicy="no-referrer"
           />
           <div className="absolute inset-0 bg-[#001F3F]/80" />

@@ -1,5 +1,6 @@
 import { Banknote, Milestone, ShieldAlert } from 'lucide-react';
 import { motion } from 'motion/react';
+import heroImg from '../assets/images/heroImg.webp';
 
 interface PracticeViewProps {
   onContactClick: () => void;
@@ -18,7 +19,7 @@ export default function RepossessionsView({ onContactClick }: PracticeViewProps)
           <img 
             alt="Collections and Repossessions background" 
             className="w-full h-full object-cover" 
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCB0_5sj408mG2QFbiMib_HT02s2JSXb0C_7QrMa-fZG8Yz8h8pDPQzs9W-8fHtqsPBX5c2GcREhqtcOH50Q054Mnur2cHvIDyaWN5afy-x5EQWJtRtrcQoz3PR71yLMx4Qu-dZxHL_xCR5vgDx8-2YT-OL6IXOsLQTqM0sn01ECvOQMyMH3QpWMX4q_h-bP3pqYPTr1UmE7fAKE-p0_j6xl8wMP-SXeJz-smhIbzeY1KIiR_iUgTsY5d6Odw-x8CxObrKc6-sbZMi4"
+            src={heroImg}
             referrerPolicy="no-referrer"
           />
           <div className="absolute inset-0 bg-[#001F3F]/80" />

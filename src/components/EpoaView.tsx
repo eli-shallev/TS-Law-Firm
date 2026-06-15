@@ -1,5 +1,6 @@
 import { FileCheck, HeartHandshake, ShieldCheck } from 'lucide-react';
 import { motion } from 'motion/react';
+import heroImg from '../assets/images/heroImg.webp';
 
 interface PracticeViewProps {
   onContactClick: () => void;
@@ -18,7 +19,7 @@ export default function EpoaView({ onContactClick }: PracticeViewProps) {
           <img 
             alt="Professional law office background" 
             className="w-full h-full object-cover" 
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBp9g0fp2FHGufPQzhlRjxWbIY3IlvLIMAceThfg5JqeMZSWG98_WCoUIQhrce_NOwFLyS396bb6iscShuQ_aPlNlYvIuYrGZyra3LxA1ODCWShnx99IyLCWi6zA4sZ2IHavBD5TYHCxJrKX81YvsW_sH8Np2LNPLm7iLT3hE0igwyt-v9cD674jj4aX57WaYZ7-ZlBU9RXlQLI4xp3KNk-iQKvdMLsRFWybeH46oNeuh7cncmuw2sYEgYFUBWnFHMIx9qaNxK1NkB3"
+            src={heroImg}
             referrerPolicy="no-referrer"
           />
           <div className="absolute inset-0 bg-[#001F3F]/80" />
