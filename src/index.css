@@ -77,7 +77,7 @@ body.accessibility-high-contrast textarea {
   border: 2px solid #ffff00 !important;
 }
 
-body.accessibility-grayscale {
+body.accessibility-grayscale #root > div > :not(.accessibility-helper-el) {
   filter: grayscale(100%) !important;
 }
 

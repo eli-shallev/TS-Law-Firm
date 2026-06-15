@@ -290,65 +290,127 @@ export default function AccessibilityWidget() {
       {/* Accessibility Statement Modal Dialog */}
       <AnimatePresence>
         {isStatementOpen && (
-          <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[110] flex items-center justify-center p-6">
+          <div className="fixed inset-0 bg-black/60 backdrop-blur-md z-[110] flex items-center justify-center p-4 sm:p-6" dir="rtl">
             <motion.div
-              initial={{ scale: 0.95, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.95, opacity: 0 }}
-              className="bg-white rounded-2xl shadow-2xl max-w-lg w-full p-6 text-right border border-gray-100 max-h-[85vh] overflow-y-auto"
+              initial={{ scale: 0.95, opacity: 0, y: 15 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.95, opacity: 0, y: 15 }}
+              transition={{ type: 'spring', duration: 0.4 }}
+              className="bg-white rounded-3xl shadow-2xl max-w-xl w-full text-right border border-[#cca830]/20 max-h-[85vh] flex flex-col overflow-hidden relative"
               role="dialog"
               aria-modal="true"
               aria-labelledby="acc-statement-title"
               id="accessibility-statement-modal"
             >
-              {/* Header */}
-              <div className="flex justify-between items-center pb-4 mb-4 border-b border-gray-100">
+              {/* Top Premium Accent Bar */}
+              <div className="h-1.5 w-full bg-gradient-to-r from-[#001F3F] via-[#cca830] to-[#001F3F]" />
+
+              {/* Header - Fixed */}
+              <div className="flex justify-between items-center px-6 sm:px-8 pt-6 pb-4 border-b border-gray-100 bg-gray-50/50">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-[#001F3F]/5 flex items-center justify-center border border-[#cca830]/10">
+                    <Accessibility size={20} className="text-[#cca830]" />
+                  </div>
+                  <div>
+                    <h2 id="acc-statement-title" className="font-serif font-black text-xl text-[#001F3F] leading-tight">
+                      הצהרת נגישות
+                    </h2>
+                    <p className="text-[11px] text-[#cca830] font-medium font-mono uppercase tracking-wider">
+                      טננבאום שלו • משרד עורכי דין
+                    </p>
+                  </div>
+                </div>
                 <button
                   onClick={() => setIsStatementOpen(false)}
-                  className="text-gray-400 hover:text-gray-600 p-1 rounded-full hover:bg-gray-50 flex items-center justify-center cursor-pointer"
+                  className="text-gray-400 hover:text-gray-700 p-2 rounded-full hover:bg-gray-100 flex items-center justify-center cursor-pointer transition-colors border border-transparent hover:border-gray-200"
                   aria-label="סגור הצהרת נגישות"
                 >
-                  <X size={20} />
+                  <X size={18} />
                 </button>
-                <h2 id="acc-statement-title" className="font-serif font-bold text-xl text-[#001F3F]">
-                  הצהרת נגישות - משרד עורכי דין טננבאום שלו
-                </h2>
               </div>
 
-              {/* Body Content */}
-              <div className="space-y-4 font-sans text-sm text-gray-700 leading-relaxed text-justify">
-                <p>
-                  משרד עורכי הדין טננבאום שלו רואה חשיבות עליונה במתן שירות שוויוני, מכבד ונגיש לכלל חברי הקהילה. מתוך תפיסת עולם זו, השקענו מאמצים ומשאבים רבים בהנגשת האתר שלנו, במטרה לאפשר גם לאנשים עם מוגבלות חוויית גלישה נוחה, עצמאית וידידותית.
-                </p>
-                <h3 className="font-serif font-bold text-base text-[#001F3F] mt-6 mb-2">עמידה בתקנים</h3>
-                <p>
-                  אתר האינטרנט של משרדנו מותאם להוראות הנגישות המפורטות בחוק שוויון זכויות לאנשים עם מוגבלות, וכן להנחיות התקן הישראלי (ת"י 5568) ולהמלצות מסמך WCAG 2.0 הבינלאומי ברמת התאמה AA.
-                </p>
-                <h3 className="font-serif font-bold text-base text-[#001F3F] mt-6 mb-2">אמצעי הנגישות הקיימים באתר:</h3>
-                <ul className="list-disc list-inside space-y-2 pr-2">
-                  <li><strong>ניווט מקלדת מלא:</strong> תמיכה מלאה בניווט ללא שימוש בעכבר באמצעות שימוש במקשי Tab ו-Enter.</li>
-                  <li><strong>תאימות לקוראי מסך:</strong> שימוש בקוד סמנטי תקני ותמיכה במבנה כותרות היררכי מסודר.</li>
-                  <li><strong>סרגל נגישות צף:</strong> המאפשר העלאת ניגודיות, כוונון גווני אפור, הגדלת גופן, הדגשת פוקוס ועוד.</li>
-                  <li><strong>תמונות וקוד:</strong> כל התמונות החיוניות באתר כוללות תיאור חלופי הולם (Alt text).</li>
-                </ul>
-                <h3 className="font-serif font-bold text-base text-[#001F3F] mt-6 mb-2">פרטי רכז הנגישות של המשרד</h3>
-                <p>
-                  אם במהלך הגלישה נתקלתם בקושי, בשגיאה או בנושא הדורש הנגשה נוספת, נשמח מאוד לקבל מכם משוב על מנת שנוכל לשפר את האתר בצורה מתמשכת:
-                </p>
-                <div className="p-4 bg-gray-50 rounded-xl space-y-1 text-xs border border-gray-100">
-                  <p><strong>רכזת נגישות במשרד:</strong> עו"ד שני טננבאום</p>
-                  <p><strong>טלפון ישיר:</strong> 052-4088886</p>
-                  <p><strong>דואר אלקטרוני:</strong> shani@te-shlaw.co.il</p>
+              {/* Body Content - Scrollable on right */}
+              <div 
+                className="px-6 sm:px-8 py-6 overflow-y-auto flex-1 text-gray-700 text-sm leading-relaxed text-justify [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-gray-50 [&::-webkit-scrollbar-thumb]:bg-[#cca830]/35 hover:[&::-webkit-scrollbar-thumb]:bg-[#cca830]/55 [&::-webkit-scrollbar-thumb]:rounded-full"
+                dir="ltr"
+              >
+                <div dir="rtl" className="space-y-6">
+                  <p className="text-gray-600 leading-relaxed">
+                    משרד עורכי הדין <strong className="text-[#001F3F]">טננבאום שלו</strong> רואה חשיבות עליונה במתן שירות שוויוני, מכבד ונגיש לכלל חברי הקהילה. מתוך תפיסת עולם זו, השקענו מאמצים ומשאבים רבים בהנגשת האתר שלנו, במטרה לאפשר גם לאנשים עם מוגבלות חוויית גלישה נוחה, עצמאית וידידותית ביותר.
+                  </p>
+
+                  <div className="border-r-2 border-[#cca830] pr-4 py-1 bg-amber-50/10">
+                    <h3 className="font-serif font-bold text-base text-[#001F3F] mb-1">עמידה בתקנים</h3>
+                    <p className="text-gray-600">
+                      אתר האינטרנט של משרדנו מותאם להוראות הנגישות המפורטות בחוק שוויון זכויות לאנשים עם מוגבלות, וכן להנחיות התקן הישראלי (ת"י 5568) ולהמלצות מסמך WCAG 2.0 הבינלאומי ברמת התאמה AA.
+                    </p>
+                  </div>
+
+                  <div>
+                    <h3 className="font-serif font-bold text-base text-[#001F3F] mb-3 flex items-center gap-2">
+                      <Sparkles size={16} className="text-[#cca830]" />
+                      <span>אמצעי הנגישות הקיימים באתר</span>
+                    </h3>
+                    <div className="grid grid-cols-1 gap-2.5">
+                      {[
+                        { title: "ניווט מקלדת מלא:", desc: "תמיכה מלאה בניווט ללא שימוש בעכבר באמצעות שימוש במקשי Tab ו-Enter." },
+                        { title: "תאימות לקוראי מסך:", desc: "שימוש בקוד סמנטי תקני ותמיכה במבנה כותרות היררכי מסודר ומדויק." },
+                        { title: "סרגל נגישות צף:", desc: "סרגל ייעודי המאפשר העלאת ניגודיות, כוונון גווני אפור, הגדלת גופן, הדגשת פוקוס ועוד." },
+                        { title: "תמונות וחלופות:", desc: "כל התמונות החיוניות באתר כוללות תיאור חלופי הולם ומפורט (Alt text)." },
+                      ].map((item, idx) => (
+                        <div key={idx} className="flex gap-3 bg-gray-50/50 p-3 rounded-xl border border-gray-100/80 hover:border-[#cca830]/20 transition-all">
+                          <div className="w-5 h-5 rounded-full bg-[#cca830]/15 flex items-center justify-center text-[#cca830] flex-shrink-0 mt-0.5 font-bold text-xs">
+                            ✓
+                          </div>
+                          <div className="text-xs sm:text-sm">
+                            <strong className="text-[#001F3F] font-semibold">{item.title} </strong>
+                            <span className="text-gray-600">{item.desc}</span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="bg-gradient-to-br from-gray-50 to-amber-50/20 rounded-2xl p-5 border border-gray-100">
+                    <h3 className="font-serif font-bold text-md text-[#001F3F] mb-3 flex items-center gap-2">
+                      <Info size={16} className="text-[#cca830]" />
+                      <span>פרטי רכז הנגישות של המשרד</span>
+                    </h3>
+                    <p className="text-xs text-gray-500 mb-4 leading-relaxed">
+                      אם במהלך הגלישה באתר נתקלתם בקושי, בשגיאה או בנושא הדורש הנגשה נוספת, נשמח מאוד לקבל מכם משוב על מנת שנוכל לשפר ולתקן בצורה מהירה ומקצועית:
+                    </p>
+                    
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm pt-2 border-t border-gray-100">
+                      <div className="space-y-1">
+                        <p className="text-gray-400 text-[11px] uppercase tracking-wider">רכזת נגישות במשרד:</p>
+                        <p className="text-[#001F3F] font-bold">עו"ד שני טננבאום</p>
+                      </div>
+                      <div className="space-y-1">
+                        <p className="text-gray-400 text-[11px] uppercase tracking-wider font-medium">טלפון ישיר:</p>
+                        <a href="tel:0524088886" className="text-[#cca830] hover:text-[#002f5f] font-bold hover:underline transition-all">
+                          052-4088886
+                        </a>
+                      </div>
+                      <div className="space-y-1 sm:col-span-2 mt-2">
+                        <p className="text-gray-400 text-[11px] uppercase tracking-wider font-medium">דואר אלקטרוני לפניות:</p>
+                        <a href="mailto:shani@te-shlaw.co.il" className="text-[#001F3F] hover:text-[#cca830] font-semibold hover:underline transition-all break-all">
+                          shani@te-shlaw.co.il
+                        </a>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              {/* Close Button */}
-              <button
-                onClick={() => setIsStatementOpen(false)}
-                className="w-full mt-6 py-2.5 bg-[#001F3F] hover:bg-[#002f5f] text-white font-bold text-sm rounded-xl transition-colors cursor-pointer"
-              >
-                הבנתי, תודה
-              </button>
+              {/* Close Footer - Fixed */}
+              <div className="p-4 sm:p-5 border-t border-gray-100 bg-gray-50/40 text-left">
+                <button
+                  onClick={() => setIsStatementOpen(false)}
+                  className="w-full sm:w-auto px-8 py-3 bg-[#001F3F] hover:bg-[#002f5f] text-white hover:text-white font-bold text-sm rounded-xl transition-all duration-300 cursor-pointer shadow-md hover:shadow-lg border border-[#cca830]/20 hover:border-[#cca830]/40 text-center"
+                >
+                  הבנתי, תודה
+                </button>
+              </div>
             </motion.div>
           </div>
         )}

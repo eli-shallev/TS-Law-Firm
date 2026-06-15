@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { ActiveView, ContactSubmission } from './types';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -14,8 +15,44 @@ import RepossessionsView from './components/RepossessionsView';
 import ContactView from './components/ContactView';
 import { AnimatePresence, motion } from 'motion/react';
 
+const viewToPath: Record<ActiveView, string> = {
+  home: '/',
+  about: '/about',
+  insolvency: '/insolvency',
+  epoa: '/epoa',
+  litigation: '/litigation',
+  wills: '/wills',
+  repossessions: '/repossessions',
+  contact: '/contact',
+};
+
+const pathToView: Record<string, ActiveView> = {
+  '/': 'home',
+  '/about': 'about',
+  '/insolvency': 'insolvency',
+  '/epoa': 'epoa',
+  '/litigation': 'litigation',
+  '/wills': 'wills',
+  '/repossessions': 'repossessions',
+  '/contact': 'contact',
+};
+
 export default function App() {
-  const [activeView, setActiveView] = useState<ActiveView>('home');
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  // Normalize path by stripping trailing slash unless it's the root path '/'
+  const currentPath = location.pathname.endsWith('/') && location.pathname !== '/'
+    ? location.pathname.slice(0, -1)
+    : location.pathname;
+
+  // Derive the active view from the current URL path, fallback to 'home'
+  const activeView = pathToView[currentPath] || 'home';
+
+  // Navigation function passed to state-driven children
+  const setActiveView = (view: ActiveView) => {
+    navigate(viewToPath[view] || '/');
+  };
 
   // Dynamically synchronize HTML document title with premium titles based on active tab
   useEffect(() => {
