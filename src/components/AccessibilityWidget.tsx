@@ -158,7 +158,11 @@ export default function AccessibilityWidget() {
             id="accessibility-control-panel"
           >
             {/* Header */}
-            <div className="flex justify-between items-center pb-4 mb-4 border-b border-gray-100">
+            <div className="flex justify-between items-center pb-4 mb-4 border-b border-gray-100" dir="rtl">
+              <div className="flex items-center gap-2">
+                <Accessibility size={22} className="text-[#cca830]" />
+                <span className="font-serif font-bold text-lg text-[#001F3F]">תפריט נגישות מקצועי</span>
+              </div>
               <button
                 onClick={() => setIsOpen(false)}
                 className="text-gray-400 hover:text-gray-600 p-1 rounded-full hover:bg-gray-50 flex items-center justify-center cursor-pointer"
@@ -166,10 +170,6 @@ export default function AccessibilityWidget() {
               >
                 <X size={20} />
               </button>
-              <div className="flex items-center gap-2">
-                <span className="font-serif font-bold text-lg text-[#001F3F]">תפריט נגישות מקצועי</span>
-                <Accessibility size={22} className="text-[#cca830]" />
-              </div>
             </div>
 
             {/* Subtitle */}
