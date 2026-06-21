@@ -13,9 +13,36 @@ import {
   Info
 } from 'lucide-react';
 
-export default function AccessibilityWidget() {
+interface AccessibilityWidgetProps {
+  isStatementOpenExternal?: boolean;
+  onStatementCloseExternal?: () => void;
+  onStatementOpenExternal?: () => void;
+}
+
+export default function AccessibilityWidget({
+  isStatementOpenExternal,
+  onStatementCloseExternal,
+  onStatementOpenExternal,
+}: AccessibilityWidgetProps = {}) {
   const [isOpen, setIsOpen] = useState(false);
-  const [isStatementOpen, setIsStatementOpen] = useState(false);
+  const [isStatementOpenInternal, setIsStatementOpenInternal] = useState(false);
+
+  const isStatementOpen = isStatementOpenExternal !== undefined ? isStatementOpenExternal : isStatementOpenInternal;
+  const setIsStatementOpen = (val: boolean) => {
+    if (val) {
+      if (onStatementOpenExternal) {
+        onStatementOpenExternal();
+      } else {
+        setIsStatementOpenInternal(true);
+      }
+    } else {
+      if (onStatementCloseExternal) {
+        onStatementCloseExternal();
+      } else {
+        setIsStatementOpenInternal(false);
+      }
+    }
+  };
   const panelRef = useRef<HTMLDivElement>(null);
 
   // Accessibility States

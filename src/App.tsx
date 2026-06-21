@@ -1,8 +1,9 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ActiveView, ContactSubmission } from './types';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import PrivacyPolicyModal from './components/PrivacyPolicyModal';
 import WhatsAppButton from './components/WhatsAppButton';
 import AccessibilityWidget from './components/AccessibilityWidget';
 import HomeView from './components/HomeView';
@@ -46,8 +47,22 @@ export default function App() {
     ? location.pathname.slice(0, -1)
     : location.pathname;
 
-  // Derive the active view from the current URL path, fallback to 'home'
-  const activeView = pathToView[currentPath] || 'home';
+  const [lastValidPath, setLastValidPath] = useState('/');
+
+  const VALID_VIEWS = ['/', '/about', '/insolvency', '/epoa', '/litigation', '/wills', '/repossessions', '/contact'];
+
+  useEffect(() => {
+    if (VALID_VIEWS.includes(currentPath)) {
+      setLastValidPath(currentPath);
+    }
+  }, [currentPath]);
+
+  const isPrivacyOpen = currentPath === '/privacy';
+  const isAccessibilityOpen = currentPath === '/accessibility';
+
+  // Derive the active view from the current URL path or last valid path if we're in a modal route
+  const resolvedPath = (isPrivacyOpen || isAccessibilityOpen) ? lastValidPath : currentPath;
+  const activeView = pathToView[resolvedPath] || 'home';
 
   // Navigation function passed to state-driven children
   const setActiveView = (view: ActiveView) => {
@@ -56,18 +71,24 @@ export default function App() {
 
   // Dynamically synchronize HTML document title with premium titles based on active tab
   useEffect(() => {
-    const titlesMap: Record<ActiveView, string> = {
-      home: 'טננבאום שלו - משרד עורכי דין | דף הבית',
-      about: 'אודות עו"ד שני טננבאום | טננבאום שלו',
-      insolvency: 'חדלות פירעון ושיקום כלכלי | טננבאום שלו',
-      epoa: 'ייפוי כוח מתמשך | טננבאום שלו',
-      litigation: 'ליטיגציה וניהול סכסוכים | טננבאום שלו',
-      wills: 'ירושות וצוואות | טננבאום שלו',
-      repossessions: 'גבייה והוצאה לפועל | טננבאום שלו',
-      contact: 'צור קשר | טננבאום שלו - משרד עורכי דין',
-    };
-    document.title = titlesMap[activeView] || 'טננבאום שלו - משרד עורכי דין';
-  }, [activeView]);
+    if (currentPath === '/privacy') {
+      document.title = 'מדיניות פרטיות | טננבאום שלו - משרד עורכי דין';
+    } else if (currentPath === '/accessibility') {
+      document.title = 'הצהרת נגישות | טננבאום שלו - משרד עורכי דין';
+    } else {
+      const titlesMap: Record<ActiveView, string> = {
+        home: 'טננבאום שלו משרד עורכי דין | ייצוג משפטי, חדלות פירעון וירושות',
+        about: 'אודות עו"ד שני טננבאום | טננבאום שלו',
+        insolvency: 'חדלות פירעון ושיקום כלכלי | טננבאום שלו',
+        epoa: 'ייפוי כוח מתמשך | טננבאום שלו',
+        litigation: 'ליטיגציה וניהול סכסוכים | טננבאום שלו',
+        wills: 'ירושות וצוואות | טננבאום שלו',
+        repossessions: 'גבייה והוצאה לפועל | טננבאום שלו',
+        contact: 'צור קשר | טננבאום שלו - משרד עורכי דין',
+      };
+      document.title = titlesMap[activeView] || 'טננבאום שלו משרד עורכי דין | ייצוג משפטי, חדלות פירעון וירושות';
+    }
+  }, [activeView, currentPath]);
 
   // Scroll to the top when the page (activeView) changes
   useEffect(() => {
@@ -145,11 +166,20 @@ export default function App() {
       </div>
 
       {/* Persistent global footer details */}
-      <Footer onNavClick={setActiveView} />
+      <Footer 
+        onNavClick={setActiveView} 
+        onPrivacyClick={() => navigate('/privacy')} 
+        onAccessibilityClick={() => navigate('/accessibility')} 
+      />
 
       {/* Floating active action anchors (WhatsApp, Call support, floating tags) */}
       <WhatsAppButton />
-      <AccessibilityWidget />
+      <AccessibilityWidget 
+        isStatementOpenExternal={isAccessibilityOpen}
+        onStatementCloseExternal={() => navigate(lastValidPath)}
+        onStatementOpenExternal={() => navigate('/accessibility')}
+      />
+      <PrivacyPolicyModal isOpen={isPrivacyOpen} onClose={() => navigate(lastValidPath)} />
     </div>
   );
 }

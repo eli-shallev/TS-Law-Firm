@@ -75,9 +75,11 @@ const InstagramGoldIcon = () => (
 
 interface FooterProps {
   onNavClick: (view: ActiveView) => void;
+  onPrivacyClick: () => void;
+  onAccessibilityClick: () => void;
 }
 
-export default function Footer({ onNavClick }: FooterProps) {
+export default function Footer({ onNavClick, onPrivacyClick, onAccessibilityClick }: FooterProps) {
   const handleLogoClick = () => {
     onNavClick('home');
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -99,9 +101,26 @@ export default function Footer({ onNavClick }: FooterProps) {
             />
           </div>
 
-          {/* Centered Copyright with elegant font sizing */}
-          <div className="text-white/60 font-sans text-sm md:w-1/3 text-center order-3 md:order-2" id="footer-copyright-text">
-            © טננבאום שלו - משרד עורכי דין. כל הזכויות שמורות.
+          {/* Centered Copyright, Privacy policy, and Accessibility statement links with elegant font sizing */}
+          <div className="text-white/60 font-sans text-sm md:w-1/3 text-center order-3 md:order-2 flex flex-col items-center gap-2" id="footer-copyright-text">
+            <span>© טננבאום שלו - משרד עורכי דין. כל הזכויות שמורות.</span>
+            <div className="flex flex-wrap justify-center items-center gap-x-3 gap-y-1">
+              <button
+                onClick={onPrivacyClick}
+                className="text-white/40 hover:text-[#D4AF37] text-xs transition-colors duration-200 underline cursor-pointer hover:underline focus:outline-none"
+                id="footer-privacy-policy-link"
+              >
+                מדיניות פרטיות
+              </button>
+              <span className="text-white/20 text-xs">•</span>
+              <button
+                onClick={onAccessibilityClick}
+                className="text-white/40 hover:text-[#D4AF37] text-xs transition-colors duration-200 underline cursor-pointer hover:underline focus:outline-none"
+                id="footer-accessibility-statement-link"
+              >
+                הצהרת נגישות
+              </button>
+            </div>
           </div>
 
           {/* Social Network gold-themed badge buttons centered with high-end luxury styling */}
